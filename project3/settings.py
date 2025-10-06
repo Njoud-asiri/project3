@@ -25,7 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # تطبيقات المشروع الخاصة
-    'accounts.apps.AccountsConfig',  # لضمان ظهور الاسم بالعربية
+    'accounts.apps.AccountsConfig',
     'products.apps.ProductsConfig',
 ]
 
@@ -46,16 +46,19 @@ MIDDLEWARE = [
 # ⚙️ إعدادات المشروع العامة
 ROOT_URLCONF = 'project3.urls'
 
-# 🧩 تعريف مسار القوالب (templates)
-TEMPLATES_DIR = BASE_DIR / 'templates'  # مجلد القوالب في جذر المشروع
+
+# 🧩 إعدادات القوالب (Templates)
+# لاحظي أن اسم المجلد هو "tempaltes" كما ذكرتِ بالضبط
+TEMPLATES_DIR = BASE_DIR / 'tempaltes'  
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_DIR],  # 🔹 هنا تمت إضافة مسار القوالب
+        'DIRS': [TEMPLATES_DIR],  # 🔹 مسار القوالب
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -64,6 +67,8 @@ TEMPLATES = [
     },
 ]
 
+
+# 🚀 إعداد تطبيق WSGI
 WSGI_APPLICATION = 'project3.wsgi.application'
 
 
@@ -93,9 +98,16 @@ USE_L10N = True
 USE_TZ = True
 
 
-# 🖼️ الملفات الثابتة (CSS, JS, Images)
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']  # تعريف مجلد static العام
+# 🖼️ الملفات الثابتة (Static Files)
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']  # مجلد static العام أثناء التطوير
+STATIC_ROOT = BASE_DIR / 'staticfiles'    # مجلد التجميع النهائي للنشر
+
+
+# 📸 ملفات الوسائط (Media Files)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'  # مكان تخزين الملفات المرفوعة
+
 
 # 🧱 الحقل الافتراضي للمفاتيح الأساسية
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
