@@ -1,10 +1,15 @@
+# -*- coding: utf-8 -*-
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
-# نموذج مبدئي بسيط للمنتجات
 class Product(models.Model):
-    name = models.CharField(max_length=100)
-    price = models.DecimalField(max_digits=8, decimal_places=2)
-    created_at = models.DateTimeField(auto_now_add=True)
+    اسم_المنتج = models.CharField(max_length=100, verbose_name=_('اسم المنتج'))
+    السعر = models.DecimalField(max_digits=8, decimal_places=2, verbose_name=_('السعر'))
+    تاريخ_الإضافة = models.DateTimeField(auto_now_add=True, verbose_name=_('تاريخ الإضافة'))
+
+    class Meta:
+        verbose_name = _('المنتج')            # اسم المفرد بالعربية في لوحة التحكم
+        verbose_name_plural = _('المنتجات')   # اسم الجمع بالعربية في لوحة التحكم
 
     def __str__(self):
-        return self.name
+        return self.اسم_المنتج
